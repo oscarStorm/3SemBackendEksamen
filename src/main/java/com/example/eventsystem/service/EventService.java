@@ -67,4 +67,18 @@ public class EventService {
         return new ResponseEntity(true, HttpStatus.OK);
 
     }
+
+    public void deleteEventById(long id) {
+        Event event = findEvent(id);
+        eventRepository.delete(event);
+    }
+
+    public List<EventResponse> getEventsByName(String name) {
+        return eventRepository.findByName(name)
+                .stream()
+                .map(EventResponse::new)
+                .collect(Collectors.toList());
+    }
+
+
 }

@@ -43,7 +43,15 @@ public class EventController {
         return ResponseEntity.ok(true);
     }
 
+    @DeleteMapping({"{id}"})
+    void deleteEvent(@PathVariable long id){
+        eventService.deleteEventById(id);
+    }
 
+    @GetMapping("/name/{name}")
+    public List<EventResponse> getEventsByName(@PathVariable String name) {
+        return eventService.getEventsByName(name);
+    }
 
 
 }

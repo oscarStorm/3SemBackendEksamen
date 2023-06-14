@@ -46,7 +46,7 @@ public class Event {
     private Location location;
 
 
-    @OneToMany(mappedBy = "event")
+    @OneToMany(mappedBy = "event", cascade = CascadeType.REMOVE)
     private List<EventAttendee> eventAttendees = new ArrayList<>();
 
     public Event(EventRequest er){

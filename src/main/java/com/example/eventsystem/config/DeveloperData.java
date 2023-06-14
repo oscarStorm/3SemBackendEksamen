@@ -4,7 +4,7 @@ import com.example.eventsystem.entity.Attendee;
 import com.example.eventsystem.entity.Event;
 import com.example.eventsystem.entity.EventAttendee;
 import com.example.eventsystem.entity.Location;
-import com.example.eventsystem.repository.AttendeRepository;
+import com.example.eventsystem.repository.AttendeeRepository;
 import com.example.eventsystem.repository.EventAttendeeRepository;
 import com.example.eventsystem.repository.EventRepository;
 import com.example.eventsystem.repository.LocationRepository;
@@ -17,12 +17,12 @@ import java.time.LocalDateTime;
 @Controller
 public class DeveloperData implements ApplicationRunner {
 
-    AttendeRepository attendeRepository;
+    AttendeeRepository attendeRepository;
     EventRepository eventRepository;
     LocationRepository locationRepository;
     EventAttendeeRepository eventAttendeeRepository;
 
-    public DeveloperData(AttendeRepository attendeRepository,EventRepository eventRepository, LocationRepository locationRepository, EventAttendeeRepository eventAttendeeRepository){
+    public DeveloperData(AttendeeRepository attendeRepository, EventRepository eventRepository, LocationRepository locationRepository, EventAttendeeRepository eventAttendeeRepository){
         this.attendeRepository = attendeRepository;
         this.eventRepository = eventRepository;
         this.locationRepository = locationRepository;
