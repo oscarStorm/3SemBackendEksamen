@@ -1,5 +1,9 @@
 package com.example.eventsystem.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
@@ -18,6 +22,8 @@ import java.util.*;
 @Builder
 
 @Entity
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+
 public class Location {
 
     @Id
@@ -31,6 +37,7 @@ public class Location {
     LocalDateTime created;
     @UpdateTimestamp
     LocalDateTime lastEdited;
+
 
     @OneToMany(mappedBy = "location")
     private List<Event> events = new ArrayList<>();

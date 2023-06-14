@@ -1,5 +1,11 @@
 package com.example.eventsystem.entity;
 
+import com.example.eventsystem.LocationSerializer;
+import com.example.eventsystem.dto.EventRequest;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
@@ -18,6 +24,7 @@ import java.util.*;
 @Builder
 
 @Entity
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Event {
 
     @Id
@@ -32,12 +39,23 @@ public class Event {
     LocalDateTime created;
     @UpdateTimestamp
     LocalDateTime lastEdited;
+
+    @JsonSerialize(using = LocationSerializer.class)
     @ManyToOne
-    @JoinColumn(name = "location_id")
+    @JoinColumn(name = "location_id", nullable = false)
     private Location location;
+
 
     @OneToMany(mappedBy = "event")
     private List<EventAttendee> eventAttendees = new ArrayList<>();
+
+    public Event(EventRequest er){
+        this.name = er.getName();
+        this.date = er.getDate();
+        this.description = er.getDescription();
+        this.capacity = er.getCapacity();
+        this.location = er.getLocation();
+    }
 
     public Event(String name, String date, String description, int capacity, Location location){
 

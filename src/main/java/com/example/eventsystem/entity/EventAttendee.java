@@ -1,8 +1,12 @@
 package com.example.eventsystem.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
 
@@ -13,6 +17,8 @@ import java.time.LocalDateTime;
 @Builder
 
 @Entity
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+
 public class EventAttendee {
 
     @Id
@@ -28,6 +34,11 @@ public class EventAttendee {
     private Attendee attendee;
 
     private LocalDateTime registrationDate;
+
+    @CreationTimestamp
+    LocalDateTime created;
+    @UpdateTimestamp
+    LocalDateTime lastEdited;
 
     public EventAttendee(Event event, Attendee attendee, LocalDateTime registrationDate){
 
